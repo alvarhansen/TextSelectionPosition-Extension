@@ -3,6 +3,7 @@ function createLabel(textarea) {
     label.classList.add("selection-end-label");
     label.textContent = getPositionInfo(textarea);
     textarea.insertAdjacentElement("afterend", label);
+    label.style.display = "none"; // Hide the label by default
     return label;
   }
   
@@ -63,6 +64,17 @@ function createLabel(textarea) {
   
     textarea.addEventListener("keyup", () => {
       updateLabel(label, textarea);
+    });
+
+    // Show the label when the textarea is focused
+    textarea.addEventListener("focus", () => {
+      label.style.display = "inline";
+      updateLabel(label, textarea);
+    });
+
+    // Hide the label when the textarea loses focus
+    textarea.addEventListener("blur", () => {
+      label.style.display = "none";
     });
   }
   
